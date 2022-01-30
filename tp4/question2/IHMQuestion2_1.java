@@ -1,20 +1,24 @@
 package question2;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.JApplet;
 
-public class IHMQuestion2_1 extends JFrame {
+public class IHMQuestion2_1 extends JFrame{
 
     private JButton boutonA = new JButton("A");
     private JButton boutonB = new JButton("B");
     private JButton boutonC = new JButton("C");
-
+   
     private TextArea contenu = new TextArea(30, 80);
-
- 
+    private JButtonObserver jbo1 = new JButtonObserver("jb1" , contenu);
+    private JButtonObserver jbo2 = new JButtonObserver("jb2" , contenu);
+    private JButtonObserver jbo3 = new JButtonObserver("jb3" , contenu);
+    private boolean testSouris = false;
     public IHMQuestion2_1() {
         super("IHM Question2_1");
+        
         JPanel enHaut = new JPanel();
         enHaut.add(boutonA);
         enHaut.add(boutonB);
@@ -26,19 +30,32 @@ public class IHMQuestion2_1 extends JFrame {
         enHaut.setBackground(Color.blue);
         setLocation(100,100);
         pack();show();
-
+    
         // à compléter
         // le bouton A a 3 observateurs jbo1, jbo2 et jbo3
-
+          boutonA.addActionListener(jbo1);
+          boutonA.addActionListener(jbo2);
+          boutonA.addActionListener(jbo3);
         // le bouton B a 2 observateurs jbo1 et jbo2
-
+          boutonB.addActionListener(jbo1);
+          boutonB.addActionListener(jbo2);
+          
         // le bouton C a 1 observateur jbo1
-
+         boutonC.addActionListener(jbo1);
+            if (testSouris) { 
+            // le bouton A a 1 observateur jmo1
+            boutonA.addMouseListener(new JMouseObserver("jmo1", contenu));
+            // le bouton B a 1 observateur jmo2
+            boutonB.addMouseListener(new JMouseObserver("jmo2", contenu));
+            // le bouton C a 1 observateur jmo3
+            boutonC.addMouseListener(new JMouseObserver("jmo3", contenu)); 
       
     }
+}
     
     public static void main(String[] args){
         new IHMQuestion2_1();
     }
 
 }
+
